@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .slider{
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background:blue;
+            background-size: cover;
+            border-radius: 5px;
+        }
+        .stripe{
+            position: absolute;
+            top:15px;
+            width: 200px;
+            height: 15px;
+            background: grey;
+            background-size: cover;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="stripe"></div>
+<div class="slider"></div>
+
+<script>
+    let slider=document.querySelector('.slider');
+    let sliderTop=slider.style.top;
+        slider.addEventListener('mousedown',()=>{
+            let coords=slider.getBoundingClientRect();
+            let shiftX=event.pageX-coords.left;
+            let shiftY=event.pageY-coords.top;
+            console.log(`Catch ${shiftX}   ${shiftY}`);
+            moveSlider(event,shiftX,sliderTop);
+
+            document.querySelector('.stripe').onmousemove=()=>{
+                moveSlider(event,shiftX,sliderTop);
+            }
+
+            slider.onmouseup=()=>{
+                document.querySelector('.stripe').onmousemove=null;
+                slider.onmouseup=null;
+            }
+        })
+
+    let moveSlider=function (event,shiftX,sliderTop) {
+        slider.style.left=event.pageX-shiftX+'px';
+        slider.style.top=sliderTop;
+    }
+
+    slider.ondragstart=()=>{
+        return false;
+    }
+
+</script>
+</body>
+</html>

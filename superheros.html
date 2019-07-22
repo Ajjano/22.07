@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .field{
+            height: 100vh;
+            background: url("razmetka.jpg") no-repeat center;
+            background-size: cover;
+        }
+
+        .hero{
+            width: 100px;
+            height: 100px;
+        }
+
+        .ball{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="field">
+        <img src="earth.png" alt="earth" id="earth" class="hero">
+        <img src="tiger.png" alt="tiger" id="tiger" class="hero">
+        <img src="kolibri.png" alt="kolibri" id="kolibri" class="hero">
+        <img src="fish.png" alt="fish" id="fish" class="hero">
+        <img src="football_PNG52789.png" alt="" id="ball" class="ball hero">
+    </div>
+<script>
+    let hero=document.querySelectorAll('.hero');
+    hero.onload=function () {
+        hero.onmousedown=()=>{
+            event.target
+        }
+    }
+
+    let moveAt=function (e,shiftX, shiftY) {
+        console.log('Установка топ и лефт: ');
+        ball.style.left=e.pageX-shiftX+'px';
+        console.log(`${e.pageX}-${shiftX}+'px'`);
+        ball.style.top=e.pageY-shiftY+'px';
+        console.log(`${e.pageY}-${shiftY}+'px'`);
+    }
+
+</script>
+</body>
+</html>

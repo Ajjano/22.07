@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .stanford_bridge{
+        height: 100vh;
+        background: url("razmetka.jpg")no-repeat center;
+        background-size: cover;
+    }
+        .ball{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stanford_bridge">
+        <img src="football_PNG52789.png" alt="ball" class="ball">
+    </div>
+    <script>
+        let ball=document.querySelector('.ball');
+        ball.onload=function () {
+
+            //1 отследить нажатие
+            ball.addEventListener('mousedown', ()=>{
+
+                //2 подготовка к переносу
+
+                document.querySelector('.stanford_bridge').appendChild(ball);
+                let coords=ball.getBoundingClientRect();
+                let shiftX=event.pageX-coords.left;
+                let shiftY=event.pageY-coords.top;
+                console.log(shiftY);
+                console.log(shiftX);
+                ball.style.position='absolute';
+                moveAt(event,shiftX, shiftY);
+
+                //3 перемещение по экрану
+                document.querySelector('.stanford_bridge').onmousemove=()=>{
+                    moveAt(event,shiftX, shiftY);
+                }
+
+                //4  отслеживаниу окончания переноса
+                ball.onmouseup=()=>{
+                    document.querySelector('.stanford_bridge').onmousemove=null;
+                    ball.onmouseup=null;
+                }
+
+            })
+        }
+
+        let moveAt=function (e,shiftX, shiftY) {
+            console.log('Установка топ и лефт: ');
+            ball.style.left=e.pageX-shiftX+'px';
+            console.log(`${e.pageX}-${shiftX}+'px'`);
+            ball.style.top=e.pageY-shiftY+'px';
+            console.log(`${e.pageY}-${shiftY}+'px'`);
+        }
+
+        ball.ondragstart=()=>{
+            return false;
+        }
+    </script>
+</body>
+</html>
